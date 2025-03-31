@@ -17,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     die(json_encode(["status" => "error", "message" => "Método não permitido."]));
 }
 
-// Query corrigida (sem janeiro/fevereiro)
 $sql = "INSERT INTO teste (nome, quantidade) 
         VALUES ('Novo Item', 0)";
 
