@@ -3,10 +3,10 @@ header('Content-Type: application/json');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$host = "sql105.infinityfree.com";
-$user = "if0_38619095";
-$password = "8QRKmysmmmqs";
-$dbname = "if0_38619095_db_teste";
+$host = "XXXXXXXXXXXXXX";
+$user = "XXXXXXXXXXXXXX";
+$password = "XXXXXXXXXXXXXX";
+$dbname = "XXXXXXXXXXXXXX_db_teste";
 
 $conn = new mysqli($host, $user, $password, $dbname);
 
