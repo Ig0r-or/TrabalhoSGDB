@@ -41,6 +41,5 @@ if ($conn->query($sql)) {
 } else {
     echo json_encode(["status" => "error", "message" => $conn->error]);
 }
-
 $conn->close();
 ?>
