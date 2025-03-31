@@ -1,5 +1,5 @@
  document.getElementById("formAdicionar").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evita o recarregamento da página
+            event.preventDefault(); 
 
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "adicionar_item.php", true);
@@ -21,7 +21,6 @@
                 alert("Erro de conexão com o servidor.");
             };
 
-            // Envia a requisição sem dados, pois queremos apenas adicionar um item vazio
             xhr.send();
         });
          // Função para deletar um item-------------------------------------------------------------------------------------------------
@@ -35,7 +34,7 @@
                 xhr.onload = function() {
                     if (xhr.status === 200) {
                         console.log("Resposta do servidor:", xhr.responseText);
-                        loadTableData(); // Recarrega os dados da tabela após deletar o item
+                        loadTableData();
                     } else {
                         console.error("Erro na requisição:", xhr.statusText);
                     }
@@ -45,16 +44,14 @@
                     console.error("Erro de conexão.");
                 };
 
-                // Envia o ID do item a ser deletado
                 let data = "action=delete&id=" + id;
                 xhr.send(data);
             }
         }
 
-        // Carrega os dados da tabela ao carregar a página
         window.onload = loadTableData;
         
-  // Função para carregar os dados da tabela
+  // Função para carregar os dados da tabela----------------------------------------------------------------------------------------------
     function loadTableData() {
             let xhr = new XMLHttpRequest();
             xhr.open("GET", "carregar_dados.php", true);
@@ -79,14 +76,11 @@
                         tableBody.innerHTML += row;
                     });
                 }
-                // ... (restante do código permanece igual)
             };
             xhr.send();
         }
 
-        // Função saveEdit corrigida
         function saveEdit(id, field, value) {
-            // Validação básica
             if (field === 'quantidade' && isNaN(value)) {
                 alert("Quantidade deve ser um número!");
                 return;
@@ -118,6 +112,6 @@
             .catch(error => {
                 console.error("Erro:", error);
                 alert("Erro ao salvar: " + error.message);
-                loadTableData(); // Recarrega os dados originais em caso de erro
+                loadTableData();
             });
         }
