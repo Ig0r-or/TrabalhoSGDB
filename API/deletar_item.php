@@ -17,11 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     die(json_encode(["status" => "error", "message" => "Requisição inválida."]));
 }
 
-// Verifica se a ação é para deletar um item e se o ID foi enviado
 if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['id'])) {
-    $id = intval($_POST['id']); // Converte para inteiro
+    $id = intval($_POST['id']);
 
-    // Prepara a query SQL
     $sql = "DELETE FROM teste WHERE id = ?";
     $stmt = $conn->prepare($sql);
 
@@ -41,7 +39,5 @@ if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['id
 } else {
     echo json_encode(["status" => "error", "message" => "Ação inválida ou ID não fornecido."]);
 }
-
-// Fecha a conexão
 $conn->close();
 ?>

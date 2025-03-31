@@ -13,26 +13,22 @@ $conn = new mysqli($host, $user, $password, $dbname);
 if ($conn->connect_error) {
     die(json_encode(["status" => "error", "message" => $conn->connect_error]));
 }
-// Corrige o recebimento de dados:
-$input = json_decode(file_get_contents('php://input'), true); // Para AJAX JSON
-// OU (se estiver usando FormData)
+
+$input = json_decode(file_get_contents('php://input'), true);
 $id = intval($_POST['id'] ?? 0);
 $campo = $_POST['campo'] ?? '';
 $valor = $_POST['valor'] ?? '';
 
-// Debug (verifique no Network do navegador):
 file_put_contents('debug.txt', print_r($_POST, true));
 
 $id = intval($_POST['id'] ?? 0);
 $campo = $conn->real_escape_string($_POST['campo'] ?? '');
 $valor = $conn->real_escape_string($_POST['valor'] ?? '');
 
-// Validação básica
 if (!in_array($campo, ['nome', 'quantidade'])) {
     die(json_encode(["status" => "error", "message" => "Campo inválido"]));
 }
 
-// Converter quantidade para inteiro se necessário
 if ($campo === "quantidade") {
     $valor = intval($valor);
     $sql = "UPDATE teste SET quantidade = $valor WHERE id = $id";
