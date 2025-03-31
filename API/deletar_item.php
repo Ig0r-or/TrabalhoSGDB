@@ -39,5 +39,6 @@ if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['id
 } else {
     echo json_encode(["status" => "error", "message" => "Ação inválida ou ID não fornecido."]);
 }
+
 $conn->close();
 ?>
