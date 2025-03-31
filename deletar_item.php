@@ -1,0 +1,47 @@
+<?php
+error_reporting(0);
+ini_set('display_errors', 0);
+
+$host = "sql105.infinityfree.com";
+$user = "if0_38619095";
+$password = "8QRKmysmmmqs";
+$dbname = "if0_38619095_db_teste";
+
+$conn = new mysqli($host, $user, $password, $dbname);
+
+if ($conn->connect_error) {
+    die(json_encode(["status" => "error", "message" => "Erro de conexão com o banco de dados."]));
+}
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    die(json_encode(["status" => "error", "message" => "Requisição inválida."]));
+}
+
+// Verifica se a ação é para deletar um item e se o ID foi enviado
+if (isset($_POST['action']) && $_POST['action'] === 'delete' && isset($_POST['id'])) {
+    $id = intval($_POST['id']); // Converte para inteiro
+
+    // Prepara a query SQL
+    $sql = "DELETE FROM teste WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+
+        if ($stmt->execute()) {
+            echo json_encode(["status" => "success", "message" => "Item deletado com sucesso!"]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Erro ao deletar item."]);
+        }
+
+        $stmt->close();
+    } else {
+        echo json_encode(["status" => "error", "message" => "Erro ao preparar a query."]);
+    }
+} else {
+    echo json_encode(["status" => "error", "message" => "Ação inválida ou ID não fornecido."]);
+}
+
+// Fecha a conexão
+$conn->close();
+?>
