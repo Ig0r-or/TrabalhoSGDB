@@ -1,6 +1,6 @@
 # TrabalhoSGDB
 
-## Nomes: Cezar, Igor Gabriel
+## Nomes: Cezar, Igor Gabriel, Gabrielly
 
 ## Tema do trabalho:
 
