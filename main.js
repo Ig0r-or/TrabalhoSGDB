@@ -23,7 +23,7 @@
 
             xhr.send();
         });
-         // Função para deletar um item-------------------------------------------------------------------------------------------------
+         // Função para deletar um item------------------------------------------------------------------------------------------------
 
         function deleteItem(id) {
             if (confirm("Tem certeza que deseja deletar este item?")) {
