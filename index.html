@@ -3,32 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adicionar e Deletar Itens</title>
+    <title>Gerenciamento de Itens</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Gerenciamento de Itens</h1>
-        <form id="formAdicionar">
-            <button type="submit" class="btn">Adicionar Novo Item</button>
-        </form>
-        
-        <table id="tabelaItens">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Quantidade</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Itens serão carregados aqui -->
-            </tbody>
-        </table>
+    <div class="tabs-container">
+        <div class="tab-buttons">
+            <button class="tab active" onclick="mostrarAba('gerenciamento')">Gerenciar Itens</button>
+            <button class="tab" onclick="mostrarAba('retirada')">Solicitar Retirada</button>
+        </div>
+
+        <!-- Aba de Gerenciamento -->
+        <div class="tab-content active" id="gerenciamento">
+            <div class="container">
+                <h1>Gerenciamento de Itens</h1>
+                <form id="formAdicionar">
+                    <button type="submit" class="btn">Adicionar Novo Item</button>
+                </form>
+
+                <table id="tabelaItens">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Itens</th>
+                            <th>Quantidade</th>
+                            <th>Janeiro</th>
+                            <th>Fevereiro</th>
+                            <th>Março</th>
+                            <th>Abril</th>
+                            <th>Maio</th>
+                            <th>Junho</th>
+                            <th>Julho</th>
+                            <th>Agosto</th>
+                            <th>Setembro</th>
+                            <th>Outubro</th>
+                            <th>Novembro</th>
+                            <th>Dezembro</th>
+                            <th>Saldo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Itens dinâmicos -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Aba de Retirada -->
+        <div class="tab-content" id="retirada">
+            <div class="form-container">
+                <h2>Formulário de Retirada</h2>
+                <form id="formSolicitacao" method="POST">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data">Data:</label>
+                        <input type="text" id="data" name="data" readonly>
+                        <input type="hidden" id="mes" name="mes" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descricao">Descrição:</label>
+                        <textarea id="descricao" name="descricao" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="item">Item:</label>
+                        <select id="item" name="item" required>
+                            <option value="">Carregando itens...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantidade">Quantidade:</label>
+                        <input type="number" id="quantidade" name="quantidade" min="1" required>
+                    </div>
+
+                    <button type="submit" class="submit-button">Enviar</button>
+                </form>
+            </div>
+        </div>
     </div>
-    
+
+    <!-- Histórico -->
+    <div id="entrada-popup"> 
+        <h2 onclick="togglePopup()">Histórico &uarr;</h2> 
+        <ul id="historico-entrada"></ul> 
+    </div>
+
+   
+    <script>
+        function mostrarAba(id) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelector(`.tab[onclick="mostrarAba('${id}')"]`).classList.add('active');
+        }
+
+        function togglePopup() {
+            const popup = document.getElementById('entrada-popup');
+            popup.classList.toggle('aberto');
+        }
+    </script>
+
     <script src="main.js"></script>
 </body>
 </html>
-
