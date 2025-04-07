@@ -1,8 +1,8 @@
 # TrabalhoSGDB
 
-## Nomes: Cezar, Igor Gabriel, Gabrielly
+## Nomes: Cezar, Igor Gabriel, Gabrielly, Rodrigo, Vinicius
 
-## Tema do trabalho:
+## Tema do trabalho: 
 
 ### Instruções do trabalho:
 
